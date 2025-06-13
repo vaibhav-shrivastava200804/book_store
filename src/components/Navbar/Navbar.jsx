@@ -58,7 +58,7 @@ const Navbar = (onSelectSubject) => {
                 ))
               }
               <li className='group relative cursor-pointer duration-300 mr-2 hover:scale-105 hover:bg-[#a35b64] h-10 rounded-md flex p-1 items-center'>
-                <a href="/#">
+                <a href="#">
                   Quick Links &darr;
                 </a>
                 <div className='absolute left-0 top-full z-10 hidden group-hover:block bg-[#650D1B] shadow-md text-[C1DF1F] w-[6rem] rounded-md'>
@@ -69,7 +69,7 @@ const Navbar = (onSelectSubject) => {
                 </div>
               </li>
               <li className='group relative cursor-pointer duration-300 mr-2 hover:scale-105 hover:bg-[#a35b64] h-10 rounded-md flex p-1 items-center'>
-                <a href="/#">
+                <a href="#">
                   Top Categories &darr;
                 </a>
                 <div className='absolute left-0 top-full z-10 hidden group-hover:block bg-[#650D1B] shadow-md text-[C1DF1F] w-[8rem] text-sm h-[20rem] scroll-auto overflow-auto rounded-md'>
