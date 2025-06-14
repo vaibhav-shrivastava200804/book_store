@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Menu = [
-  { id: 1, name: 'Home', link: '/#' },
-  { id: 2, name: 'Best Seller', link: '/#services' },
+  { id: 1, name: "Home", link: "/book_store/" },
+  { id: 2, name: "Best Seller", link: "/book_store/" },
 ];
-
 const subjects = [
-  "Art", "Biography", "Business", "Children", "Computers", "Cooking", "Fantasy", "Health", "History",
-  "Literature", "Music", "Philosophy", "Poetry", "Politics", "Religion", "Science", "Self Help",
-  "Sports", "Technology", "Travel", "True Crime", "Young Adult"
+  "Art",
+  "Biography",
+  "Business",
+  "Children",
+  "Computers",
+  "Cooking",
+  "Fantasy",
+  "Health",
+  "History",
+  "Literature",
+  "Music",
+  "Philosophy",
+  "Poetry",
+  "Politics",
+  "Religion",
+  "Science",
+  "Self Help",
+  "Sports",
+  "Technology",
+  "Travel",
+  "True Crime",
+  "Young Adult",
 ];
 
 function displayNameToApiKey(name) {
@@ -16,11 +34,14 @@ function displayNameToApiKey(name) {
 }
 
 const Navbar = ({ onSelectSubject }) => {
-  const [openDropdown, setOpenDropdown] = useState(null); // "quick", "categories", or null
-
+  const navigate = useNavigate();
+  const [openDropdown, setOpenDropdown] = useState(null);
   const toggleDropdown = (name) => {
     setOpenDropdown(openDropdown === name ? null : name);
   };
+  const toCategory = (categoryId) => {
+  navigate(`/book_store/${categoryId}`);
+};
 
   return (
     <div className="center p-1 sm:p-2 shadow-xl bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]">
@@ -62,7 +83,7 @@ const Navbar = ({ onSelectSubject }) => {
             >
               <ul>
                 <li>
-                  <button className="w-full text-left rounded-md hover:bg-[#a35b64] hover:text-[#dfcc1f] p-2">
+                  <button className="w-full text-left rounded-md hover:bg-[#a35b64] hover:text-[white] p-2">
                     Buy Now
                   </button>
                 </li>
@@ -93,10 +114,12 @@ const Navbar = ({ onSelectSubject }) => {
                 {subjects.map((subject) => (
                   <li key={subject}>
                     <button
-                      onClick={() => {
-                        onSelectSubject(displayNameToApiKey(subject));
-                        setOpenDropdown(null); // close after click
-                      }}
+                      id={displayNameToApiKey(subject)}
+                      onClick={(e) => 
+                        {
+                          const id= e.target.id;
+                          toCategory(id);
+                          setOpenDropdown(null);}} // optional: just to close dropdown
                       className="w-full text-left rounded-md hover:bg-[#a35b64] hover:text-white p-2"
                     >
                       {subject}
