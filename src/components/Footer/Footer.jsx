@@ -13,7 +13,7 @@ const Footer = () => {
               alt="VBookz Logo"
               className="h-8 sm:h-12 w-auto"
             />
-            <p className="text-[#facc15] text-sm sm:text-2xl font-medium max-w-xs">
+            <p className="text-[#facc15] text-xl sm:text-2xl font-medium max-w-xs">
               VBookZ
             </p>
           </div>
