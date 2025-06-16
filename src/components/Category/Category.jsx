@@ -29,7 +29,7 @@ function Category() {
         <h1 className="text-3xl text-white bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] p-2 capitalize">{categoryId} &rarr;</h1>
         <div className="cards custom-scroll flex-1 flex flex-col sm:flex-row items-center overflow-x-auto gap-5 mb-1 p-1 shadow-2xl h-auto">
             {books.map((book) => (
-          <div key={book.key} className="flex flex-col gap-1 border-[white] border-[1px] rounded-md w-[300px] sm:w-[200px] p-1 flex-shrink-0 h-[550px] sm:h-[400px] overflow-clip hover:overflow-auto custom-scroll">
+          <div key={book.key} className="flex flex-col gap-1 border-[white] justify-evenly border-[1px] rounded-md w-[300px] sm:w-[200px] p-1 flex-shrink-0 h-[580px] sm:h-[400px] overflow-clip hover:overflow-auto custom-scroll">
             <img
               src={
                 book.cover_id
@@ -40,7 +40,7 @@ function Category() {
               className="mb-2 w-[280px] h-[420px] sm:w-[210px] sm:h-[280px] border border-[#facc15] mt-1 mx-auto rounded-md cursor-pointer hover:scale-102 duration-200"
             />
             <div className="detail flex flex-col h-[100px] sm:gap-0 mx-1 my-2 overflow-y-auto custom-scroll">
-              <h3 className="text-white ml-1"><b className='font-extrabold uppercase text-[white]'>Title:</b> <span className='font-medium'>{book.title}</span>
+              <h3 className="text-white ml-1 text-lg"><b className='font-extrabold uppercase text-[white]'>Title:</b> <span className='font-medium'>{book.title}</span>
               </h3>
               <p className="text-white ml-1">
                 <b className='text-md font-extrabold uppercase text-[white]'>By: </b> <span className='font-medium'>{book.authors?.map((a) => a.name).join(", ") || "Unknown Author"}</span>
