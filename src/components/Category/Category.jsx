@@ -25,7 +25,7 @@ function Category() {
   return (
     <>
     <div className="bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] mt-2">
-      <div className="text-white flex flex-col gap-2 h-[80vh] sm:h-auto">
+      <div className="text-white flex flex-col gap-2 h-[75vh] sm:h-auto">
         <h1 className="text-3xl text-white bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] p-2 capitalize">{categoryId} &rarr;</h1>
         <div className="cards custom-scroll flex-1 flex flex-col sm:flex-row items-center overflow-x-auto gap-5 mb-1 p-1 shadow-2xl h-auto">
             {books.map((book) => (
