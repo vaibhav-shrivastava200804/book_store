@@ -1,6 +1,7 @@
 @import "tailwindcss";
 /* Custom horizontal scrollbar styling */
 .custom-scroll::-webkit-scrollbar {
+  -webkit-overflow-scrolling: touch !important;
     height: 6px;
     width: 6px;
   }

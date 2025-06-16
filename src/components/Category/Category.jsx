@@ -39,7 +39,7 @@ function Category() {
               alt={book.title}
               className="mb-2 w-[280px] h-[420px] sm:w-[210px] sm:h-[280px] border border-[#facc15] mt-1 mx-auto rounded-md cursor-pointer hover:scale-102 duration-200"
             />
-            <div className="detail flex flex-col sm:h-[100px] sm:gap-0 mx-1 my-2 overflow-hidden  hover:overflow-y-scroll custom-scroll">
+            <div className="detail flex flex-col h-[100px] sm:gap-0 mx-1 my-2 overflow-hidden  hover:overflow-y-auto custom-scroll">
               <h3 className="text-white ml-1"><b className='font-extrabold uppercase text-[white]'>Title:</b> <span className='font-medium'>{book.title}</span>
               </h3>
               <p className="text-white ml-1">
