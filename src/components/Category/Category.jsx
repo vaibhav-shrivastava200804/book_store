@@ -29,7 +29,7 @@ function Category() {
         <h1 className="text-3xl text-white bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] p-2 capitalize">{categoryId} &rarr;</h1>
         <div className="cards custom-scroll flex-1 flex flex-col sm:flex-row items-center overflow-x-auto gap-5 mb-1 p-1 shadow-2xl h-auto">
             {books.map((book) => (
-          <div key={book.key} className="flex flex-col gap-1 border-[white] border-[1px] rounded-md w-[300px] sm:w-[200px] p-1 flex-shrink-0 h-[500px] sm:h-[400px] overflow-clip hover:overflow-auto custom-scroll">
+          <div key={book.key} className="flex flex-col gap-1 border-[white] border-[1px] rounded-md w-[300px] sm:w-[200px] p-1 flex-shrink-0 h-[550px] sm:h-[400px] overflow-clip hover:overflow-auto custom-scroll">
             <img
               src={
                 book.cover_id
