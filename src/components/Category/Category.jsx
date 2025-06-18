@@ -28,12 +28,15 @@ function Category() {
   fetchBooks();
 }, [offset, categoryId]);
 
+  useEffect(() => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}, [offset]);
   return (
     <>
     <div className="bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] mt-2">
       <div className="text-white flex flex-col gap-2 h-[75vh] sm:h-auto">
         <h1 className="text-3xl text-white bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] p-2 capitalize">{categoryId} &rarr;</h1>
-        <div className="cards custom-scroll flex-1 flex flex-col sm:flex-row items-center overflow-x-auto gap-5 mb-1 p-1 shadow-2xl h-auto">
+        <div className="cards custom-scroll  flex flex-col sm:flex-row border flex-wrap items-center sm:justify-evenly sm:gap-10 gap-5 mb-1 p-1 shadow-2xl h-auto">
             {loading ? (
               <div className="flex mx-auto justify-center items-center w-[150px] h-[150px]">
                 <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." className="w-20 h-20" />
@@ -42,16 +45,18 @@ function Category() {
               <div className="text-red-400 text-xl">{error}</div>
             ) : (
               books.map((book) => (
-          <div key={book.key} className="flex flex-col gap-1 border-[white] justify-evenly border-[1px] rounded-md w-[300px] sm:w-[200px] p-1 flex-shrink-0 h-[580px] sm:h-[400px] overflow-clip hover:overflow-auto custom-scroll">
-            <img
-              src={
-                book.cover_id
-                  ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`
-                  : "https://via.placeholder.com/150x200?text=No+Cover"
-              }
-              alt={book.title}
-              className="mb-2 w-[280px] h-[420px] sm:w-[210px] sm:h-[280px] border border-[#facc15] mt-1 mx-auto rounded-md cursor-pointer hover:scale-102 duration-200"
-            />
+          <div key={book.key} className="flex flex-col gap-1 border-[white] justify-evenly border-[1px] rounded-md w-[300px] sm:w-[300px] p-1 flex-shrink-0 h-[580px] sm:h-[500px] overflow-clip hover:overflow-auto custom-scroll">
+            <div className="w-[280px] h-[420px] sm:w-[280px] sm:h-[400px] flex items-center justify-center bg-white rounded-md overflow-hidden border-[#facc15] border mx-auto hover:scale-105 duration-300 cursor-pointer">
+                <img
+                  src={
+                    book.cover_id
+                      ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`
+                      : "https://via.placeholder.com/150x200?text=No+Cover"
+                  }
+                  alt={book.title || "Book cover"}
+                  className="object-cover w-full h-full border-[#facc15]"
+                />
+              </div>
             <div className="detail flex flex-col h-[100px] sm:gap-0 mx-1 my-2 overflow-y-auto custom-scroll">
               <h3 className="text-white ml-1 text-lg"><b className='font-extrabold uppercase text-[white]'>Title:</b> <span className='font-medium'>{book.title}</span>
               </h3>
