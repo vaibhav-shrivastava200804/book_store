@@ -34,9 +34,9 @@ function Category() {
   return (
     <>
     <div className="bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] mt-2">
-      <div className="text-white flex flex-col gap-2 h-[75vh] sm:h-auto">
+      <div className="text-white flex flex-col gap-2 h-[85vh] sm:h-auto">
         <h1 className="text-3xl text-white bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] p-2 capitalize">{categoryId} &rarr;</h1>
-        <div className="cards custom-scroll  flex flex-col sm:flex-row border flex-wrap items-center sm:justify-evenly sm:gap-10 gap-5 mb-1 p-1 shadow-2xl h-auto">
+        <div className="cards custom-scroll  flex flex-col sm:flex-row border overflow-y-scroll sm:flex-wrap items-center sm:justify-evenly sm:gap-10 gap-5 mb-1 p-1 shadow-2xl h-auto">
             {loading ? (
               <div className="flex mx-auto justify-center items-center w-[150px] h-[150px]">
                 <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." className="w-20 h-20" />
