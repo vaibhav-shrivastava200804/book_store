@@ -5,30 +5,43 @@ function Category() {
     const {categoryId} = useParams();
     const [books, setBooks] = useState([]);
     const [offset, setOffset] = useState(0);
+    const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
     const limit = 20;
   useEffect(() => {
-    async function fetchThrillerBooks() {
-      try {
-        const res = await fetch(
-          `https://openlibrary.org/subjects/${categoryId}.json?limit=${limit}&offset=${offset}`
-        );
-        const data = await res.json();
-        console.log(data);
-        setBooks(data.works || []);
-      } catch (error) {
-        console.error("Failed to fetch Thriller books:", error);
-      }
+  async function fetchBooks() {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(
+        `https://openlibrary.org/subjects/${categoryId}.json?limit=${limit}&offset=${offset}`
+      );
+      const data = await res.json();
+      setBooks(data.works || []);
+    } catch (error) {
+      setError("Failed to load books.");
+    } finally {
+      setLoading(false);
     }
+  }
 
-    fetchThrillerBooks();
-  }, [offset,categoryId]);
+  fetchBooks();
+}, [offset, categoryId]);
+
   return (
     <>
     <div className="bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] mt-2">
       <div className="text-white flex flex-col gap-2 h-[75vh] sm:h-auto">
         <h1 className="text-3xl text-white bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] p-2 capitalize">{categoryId} &rarr;</h1>
         <div className="cards custom-scroll flex-1 flex flex-col sm:flex-row items-center overflow-x-auto gap-5 mb-1 p-1 shadow-2xl h-auto">
-            {books.map((book) => (
+            {loading ? (
+              <div className="flex mx-auto justify-center items-center w-[150px] h-[150px]">
+                <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." className="w-20 h-20" />
+              </div>
+            ) : error ? (
+              <div className="text-red-400 text-xl">{error}</div>
+            ) : (
+              books.map((book) => (
           <div key={book.key} className="flex flex-col gap-1 border-[white] justify-evenly border-[1px] rounded-md w-[300px] sm:w-[200px] p-1 flex-shrink-0 h-[580px] sm:h-[400px] overflow-clip hover:overflow-auto custom-scroll">
             <img
               src={
@@ -47,7 +60,8 @@ function Category() {
               </p>
             </div>
           </div>
-        ))}
+        ))  
+      )}
         </div>
       </div>
       <div className="buttons flex justify-between p-2 text-2xl">

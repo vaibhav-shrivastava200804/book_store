@@ -18,13 +18,13 @@ function Second() {
         fetchThrillerBooks();
       }, []);
     return (
-      <div className='border-[#facc15] border-[2px] h-[24rem] m-1 mt-4 rounded-sm flex flex-col gap-2  bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]'>
+      <div className='border-[#facc15] border-[2px] h-max m-1 mt-4 rounded-sm flex flex-col gap-2  bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]'>
           <div className='Headline h-10 flex items-center p-3 bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] shadow-xl rounded-xl'>
               <h1 className='font-semibold text-white cursor-pointer hover:scale-105 duration-200 group'>Fall in Love with Every Page <span className='group-hover:ml-2 duration-200'>&rarr;</span></h1>
           </div>
           <div className="cards custom-scroll flex-1 flex flex-col sm:flex-row items-center overflow-x-auto gap-5 mb-1 p-1 shadow-2xl">
               {books.map((book) => (
-            <div key={book.key} className="flex flex-col gap-1 border-[white] border-[1px] rounded-md w-[240px] sm:w-[150px] h-[400px] flex-shrink-0 sm:h-[300px] overflow-clip hover:overflow-auto custom-scroll p-1">
+            <div key={book.key} className="flex flex-col gap-1 border-[white] border-[1px] rounded-md w-[240px] sm:w-[200px] h-[400px] flex-shrink-0 sm:h-[400px] overflow-clip hover:overflow-auto custom-scroll p-1">
               <img
                 src={
                   book.cover_id
@@ -32,7 +32,7 @@ function Second() {
                     : "https://via.placeholder.com/150x200?text=No+Cover"
                 }
                 alt={book.title}
-                className="mb-2 w-[200px] h-[300px] sm:w-[150px] sm:h-[200px] border border-[#facc15] mt-1 mx-auto rounded-md cursor-pointer hover:scale-105 duration-200"
+                className="mb-2 w-[200px] h-[300px] sm:w-[180px] sm:h-[240px] border border-[#facc15] mt-1 mx-auto rounded-md cursor-pointer hover:scale-105 duration-200"
               />
               <div className="detail flex flex-col gap-2 sm:gap-0 mx-1 my-2 overflow-hidden  hover:overflow-y-scroll custom-scroll">
                 <h3 className="text-white ml-1"><b className='font-extrabold uppercase text-[white]'>Title:</b> <span className='font-medium'>{book.title}</span>
