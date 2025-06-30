@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faC } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 const Menu = [
   { id: 1, name: "Home", link: "/book_store/" },
-  { id: 2, name: "Best Seller", link: "/book_store/" },
+  { id: 2, name: "Login", link: "/Login/" },
 ];
 const subjects = [
   "Art",
@@ -36,15 +41,55 @@ function displayNameToApiKey(name) {
 const Navbar = ({ onSelectSubject }) => {
   const navigate = useNavigate();
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [openSideBar, setopenSideBar] = useState(null);
+  const [viewLogin, setviewLogin] = useState(false);
+  const [username, setusername] = useState("");
+  const [password, setpassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("loggedIn");
+    if (loggedInUser === "true") {
+      setIsLoggedIn(true);
+    }
+  }, [isLoggedIn]);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    localStorage.setItem("user", JSON.stringify({ username, password }));
+    localStorage.setItem("loggedIn", "true");
+    setviewLogin(false);
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("user");
+  };
+
   const toggleDropdown = (name) => {
     setOpenDropdown(openDropdown === name ? null : name);
   };
-  const toCategory = (categoryId) => {
-  navigate(`/book_store/${categoryId}`);
-};
 
+  const toCategory = (categoryId) => {
+    navigate(`/book_store/${categoryId}`);
+  };
+
+  const toggleSidebar = (name) => {
+    setopenSideBar(openSideBar === name ? null : name);
+  };
+
+  const toggleLogin = () => {
+    if (viewLogin === true) {
+      setviewLogin(false);
+    } else {
+      setviewLogin(true);
+    }
+  };
+  const savedUser = JSON.parse(localStorage.getItem("user")) || {};
   return (
-    <div className="center p-1 sm:p-2 shadow-xl bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]">
+    <div className="center p-1 sm:p-2 shadow-xl bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] relative">
       <div className="flex justify-between items-center text-white">
         {/* Logo */}
         <img
@@ -53,21 +98,26 @@ const Navbar = ({ onSelectSubject }) => {
           className="w-10 h-14 hover:scale-110 duration-500 cursor-pointer"
         />
 
-        {/* Nav Items */}
-        <ul className="flex items-center gap-4 relative z-50">
-          {/* Main Menu Items */}
-          {Menu.map((menu) => (
-            <li key={menu.id}>
-              <a
-                href={menu.link}
-                className="inline-block py-2 px-3 rounded-md hover:text-white hover:bg-[#a35b64] hover:scale-110 duration-200"
-              >
-                {menu.name}
-              </a>
-            </li>
-          ))}
+        {/*desktop view*/}
+        <ul className="items-center gap-4 relative z-50 hidden md:flex">
+          <div className="login hidden md:flex gap-2 items-center">
+            <button
+              className="hover:scale-105 hover:bg-[#a35b64] duration-300 rounded-md px-1 py-2 cursor-pointer"
+              onClick={() => {
+                if (!isLoggedIn) toggleLogin();
+              }}
+            >
+              <Link className="flex gap-3 items-center">
+                <FontAwesomeIcon icon={faUser} />
+                <p>{isLoggedIn === true ? savedUser.username : "Login"}</p>
+              </Link>
+            </button>
+            {isLoggedIn&&
+            <button className="hover:bg-[#a35b64] px-1 cursor-pointer py-2 rounded-md" onClick={()=>{
+                handleLogout();
+              }}>LogOut</button>}
+          </div>
 
-          {/* Quick Links Dropdown */}
           <li
             className="relative cursor-pointer hover:scale-105 hover:bg-[#a35b64] duration-300 rounded-md flex p-1 items-center h-10"
             onMouseEnter={() => setOpenDropdown("quick")}
@@ -76,6 +126,7 @@ const Navbar = ({ onSelectSubject }) => {
             <button onClick={() => toggleDropdown("quick")} type="button">
               Quick Links &darr;
             </button>
+
             <div
               className={`absolute left-0 top-full z-10 ${
                 openDropdown === "quick" ? "block" : "hidden"
@@ -96,7 +147,6 @@ const Navbar = ({ onSelectSubject }) => {
             </div>
           </li>
 
-          {/* Top Categories Dropdown */}
           <li
             className="relative cursor-pointer hover:scale-105 hover:bg-[#a35b64] duration-300 rounded-md flex p-1 items-center h-10"
             onMouseEnter={() => setOpenDropdown("categories")}
@@ -106,20 +156,20 @@ const Navbar = ({ onSelectSubject }) => {
               Top Categories &darr;
             </button>
             <div
-              className={`absolute left-0 top-full z-10 ${
+              className={`absolute right-0 top-full z-10 ${
                 openDropdown === "categories" ? "block" : "hidden"
-              } bg-[#650D1B] shadow-md text-white w-[8rem] text-sm h-[20rem] overflow-auto rounded-md transition-all duration-300`}
+              } bg-[#650D1B] shadow-md text-white w-40 text-sm h-[20rem] overflow-auto rounded-md transition-all duration-300`}
             >
               <ul>
                 {subjects.map((subject) => (
                   <li key={subject}>
                     <button
                       id={displayNameToApiKey(subject)}
-                      onClick={(e) => 
-                        {
-                          const id= e.target.id;
-                          toCategory(id);
-                          setOpenDropdown(null);}} // optional: just to close dropdown
+                      onClick={(e) => {
+                        const id = e.target.id;
+                        toCategory(id);
+                        setOpenDropdown(null);
+                      }} // optional: just to close dropdown
                       className="w-full text-left rounded-md hover:bg-[#a35b64] hover:text-white p-2"
                     >
                       {subject}
@@ -130,6 +180,147 @@ const Navbar = ({ onSelectSubject }) => {
             </div>
           </li>
         </ul>
+
+        {/* Mobile View */}
+        <div className="icon px-2 md:hidden flex gap-6 items-center">
+          <div className="login cursor-pointer">
+            <button
+              onClick={() => {
+                if (!isLoggedIn) toggleLogin();
+              }}
+              className="flex gap-2 items-center"
+            >
+              <FontAwesomeIcon icon={faUser} />
+              <p>{isLoggedIn === true ? savedUser.username : "Login"}</p>
+            </button>
+          </div>
+          <FontAwesomeIcon
+            icon={faBars}
+            className="text-4xl cursor-pointer"
+            onClick={() => toggleSidebar("sideBar")}
+          />
+        </div>
+        <div
+          className={`sideBar absolute right-0 top-16 h-auto bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]
+          ${
+            openSideBar === "sideBar" ? "block" : "hidden"
+          } md:hidden z-50 rounded-2xl`}
+        >
+          <ul className="flex flex-col gap-5 border p-2 w-48 rounded-2xl text-lg">
+            <li className="cursor-pointer hover:bg-[#A35B64] px-3 py-2 rounded-md">
+              <Link to="/book_store/">Home</Link>
+            </li>
+            <li className="cursor-pointer hover:bg-[#A35B64] px-3 py-2 rounded-md">
+              <Link to="/About">About Us</Link>
+            </li>
+            <li className="cursor-pointer hover:bg-[#A35B64] px-3 py-2 rounded-md">
+              <Link to="/Contact">Contact Us</Link>
+            </li>
+            <li
+              className="relative cursor-pointer flex items-center h-10"
+              onMouseEnter={() => setOpenDropdown("categories")}
+              onMouseLeave={() => setOpenDropdown(null)}
+            >
+              <button
+                onClick={() => toggleDropdown("categories")}
+                type="button"
+                className="flex gap-2 items-center"
+              >
+                <FontAwesomeIcon icon={faChevronLeft} className="text-sm" />
+                Top Categories
+              </button>
+              <div
+                className={`absolute right-45 top-0 z-10 ${
+                  openDropdown === "categories" ? "block" : "hidden"
+                } bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] shadow-md text-white w-38 text-sm h-[20rem] overflow-auto rounded-md transition-all duration-300`}
+              >
+                <ul>
+                  {subjects.map((subject) => (
+                    <li key={subject}>
+                      <button
+                        id={displayNameToApiKey(subject)}
+                        onClick={(e) => {
+                          const id = e.target.id;
+                          toCategory(id);
+                          setOpenDropdown(null);
+                          setopenSideBar(null);
+                        }} // optional: just to close dropdown
+                        className="w-full text-left rounded-md hover:bg-[#a35b64] hover:text-white p-2"
+                      >
+                        {subject}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+            {isLoggedIn && 
+              <li className="cursor-pointer"
+              >
+                <button onClick={()=>{
+                setopenSideBar(null);
+                handleLogout();
+              }}>LogOut</button>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+
+
+      {/*Login*/}      
+      <div
+        className={`login absolute bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] left-1/2 transform -translate-x-1/2 h-60 md:h-65 w-[80%] md:w-[40%] top-16 md:top-22 rounded-2xl shadow-2xl z-50 text-white ${
+          viewLogin === true ? "block" : "hidden"
+        }`}
+      >
+        <div className="relative">
+          <div
+            className="cancelIcon absolute top-2 right-2 py-1 px-3 flex items-center justify-center rounded-full bg-white text-red-700 text-lg md:text-2xl font-bold cursor-pointer"
+            onClick={() => setviewLogin(false)}
+          >
+            X
+          </div>
+          <div className="form py-2 px-2">
+            <form className="flex flex-col gap-3" onSubmit={handleLogin}>
+              <h1 className="text-center text-2xl">Login Now</h1>
+              <div className="username flex items-center gap-2 rounded-md  w-[100%] p-2 md:text-xl bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]">
+                <label htmlFor="">Username:</label>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setusername(e.target.value)}
+                  required
+                  className="border rounded-md py-1 px-2 text-sm md:text-xl backdrop-blur bg-pink-300/20 w-[100%]"
+                  placeholder="Enter username"
+                  name=""
+                  id=""
+                />
+              </div>
+              <div className="password flex items-center gap-2 rounded-md  w-[100%] p-2 md:text-xl bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]">
+                <label htmlFor="">Password:</label>
+                <input
+                  type="text"
+                  value={password}
+                  onChange={(e) => setpassword(e.target.value)}
+                  required
+                  className="border rounded-md py-1 px-2 text-sm md:text-xl backdrop-blur bg-pink-300/20 w-[100%]"
+                  placeholder="Enter password"
+                  name=""
+                  id=""
+                />
+              </div>
+              <div className="submit flex">
+                <button
+                  type="submit"
+                  className="rounded-md border px-4 py-2 mx-auto cursor-pointer hover:scale-105 duration-300 bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]"
+                >
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );

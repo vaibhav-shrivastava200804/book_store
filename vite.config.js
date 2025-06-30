@@ -6,4 +6,5 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   base: '/book_store/',
   plugins: [tailwindcss(), react()],
+  
 });
