@@ -4,7 +4,7 @@ import logo from "../../assets/books.svg"; // Update path as per your structure
 
 const Footer = () => {
   return (
-    <footer className="flex justify-center mt-2 bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]">
+    <footer className="flex justify-center mt-2 bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)]">
       <div className="w-[86%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-between gap-14 text-white">
         <div className="flex flex-col gap-6">
           <div className="flex gap-3 py-5 items-center">

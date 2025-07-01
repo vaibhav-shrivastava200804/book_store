@@ -33,9 +33,9 @@ function Category() {
 }, [offset]);
   return (
     <>
-    <div className="bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] mt-2">
+    <div className="bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] mt-2">
       <div className="text-white flex flex-col gap-2 h-[85vh] sm:h-[95vh] mx-auto">
-        <h1 className="text-3xl text-white bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] p-2 capitalize">{categoryId} &rarr;</h1>
+        <h1 className="text-3xl text-white bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] p-2 capitalize">{categoryId} &rarr;</h1>
         <div className="cards custom-scroll flex flex-col sm:flex-row overflow-y-scroll sm:flex-wrap items-center sm:justify-between sm:gap-10 gap-5 mb-1 p-1 shadow-2xl border rounded-lg h-auto w-[95%] mx-auto">
             {loading ? (
               <div className="flex mx-auto justify-center items-center w-[150px] h-[150px]">

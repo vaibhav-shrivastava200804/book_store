@@ -18,8 +18,8 @@ function Second() {
         fetchThrillerBooks();
       }, []);
     return (
-      <div className='border-[#facc15] border-[2px] h-max m-1 mt-4 rounded-sm flex flex-col gap-2  bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]'>
-          <div className='Headline h-10 flex items-center p-3 bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] shadow-xl rounded-xl'>
+      <div className='border-[#facc15] border-[2px] md:h-max h-[40rem] m-1 mt-4 rounded-sm flex flex-col gap-2 bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)]'>
+          <div className='Headline h-10 flex items-center p-3bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] shadow-xl rounded-xl'>
               <h1 className='font-semibold text-white cursor-pointer hover:scale-105 duration-200 group'>Fall in Love with Every Page <span className='group-hover:ml-2 duration-200'>&rarr;</span></h1>
           </div>
           <div className="cards custom-scroll flex-1 flex flex-col sm:flex-row items-center overflow-x-auto gap-5 mb-1 p-1 shadow-2xl">
@@ -43,7 +43,7 @@ function Second() {
               </div>
             </div>
           ))}
-          <div className='flex rounded-lg items-center h-12 w-28 hover:bg-[#650D1B] hover:text-[white] group'>
+          <div className='flex rounded-lg items-center h-12 w-28 hover:bg-[#5a7385] hover:text-[white] group'>
               <p className='flex items-center justify-center font-bold text-lg w-24 group-hover:scale-115 cursor-pointer mr-2 duration-300 text-white group-hover:text-[white]'>More <span className='group-hover:ml-2 duration-300'>&rarr;</span></p>
               </div>
           </div>

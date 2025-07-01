@@ -89,7 +89,7 @@ const Navbar = ({ onSelectSubject }) => {
   };
   const savedUser = JSON.parse(localStorage.getItem("user")) || {};
   return (
-    <div className="center p-1 sm:p-2 shadow-xl bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] relative">
+    <div className="center p-1 sm:p-2 shadow-xl bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] relative">
       <div className="flex justify-between items-center text-white">
         {/* Logo */}
         <img
@@ -102,7 +102,7 @@ const Navbar = ({ onSelectSubject }) => {
         <ul className="items-center gap-4 relative z-50 hidden md:flex">
           <div className="login hidden md:flex gap-2 items-center">
             <button
-              className="hover:scale-105 hover:bg-[#a35b64] duration-300 rounded-md px-1 py-2 cursor-pointer"
+              className="hover:scale-105 hover:bg-[#5a7385] duration-300 rounded-md px-1 py-2 cursor-pointer"
               onClick={() => {
                 if (!isLoggedIn) toggleLogin();
               }}
@@ -113,13 +113,13 @@ const Navbar = ({ onSelectSubject }) => {
               </Link>
             </button>
             {isLoggedIn&&
-            <button className="hover:bg-[#a35b64] px-1 cursor-pointer py-2 rounded-md" onClick={()=>{
+            <button className="hover:bg-[#5a7385] px-1 cursor-pointer py-2 rounded-md" onClick={()=>{
                 handleLogout();
               }}>LogOut</button>}
           </div>
 
           <li
-            className="relative cursor-pointer hover:scale-105 hover:bg-[#a35b64] duration-300 rounded-md flex p-1 items-center h-10"
+            className="relative cursor-pointer hover:scale-105 hover:bg-[#5a7385] duration-300 rounded-md flex p-1 items-center h-10"
             onMouseEnter={() => setOpenDropdown("quick")}
             onMouseLeave={() => setOpenDropdown(null)}
           >
@@ -130,16 +130,16 @@ const Navbar = ({ onSelectSubject }) => {
             <div
               className={`absolute left-0 top-full z-10 ${
                 openDropdown === "quick" ? "block" : "hidden"
-              } bg-[#650D1B] shadow-md w-[6rem] rounded-md transition-all duration-300`}
+              } bg-[#003153] shadow-md w-[6rem] rounded-md transition-all duration-300`}
             >
               <ul>
                 <li>
-                  <button className="w-full text-left rounded-md hover:bg-[#a35b64] hover:text-[white] p-2">
+                  <button className="w-full text-left rounded-md hover:bg-[#5a7385] hover:text-[white] p-2">
                     Buy Now
                   </button>
                 </li>
                 <li>
-                  <button className="w-full text-left rounded-md hover:bg-[#a35b64] hover:text-white p-2">
+                  <button className="w-full text-left rounded-md hover:bg-[#5a7385] hover:text-white p-2">
                     Contact Us
                   </button>
                 </li>
@@ -148,7 +148,7 @@ const Navbar = ({ onSelectSubject }) => {
           </li>
 
           <li
-            className="relative cursor-pointer hover:scale-105 hover:bg-[#a35b64] duration-300 rounded-md flex p-1 items-center h-10"
+            className="relative cursor-pointer hover:scale-105 hover:bg-[#5a7385] duration-300 rounded-md flex p-1 items-center h-10"
             onMouseEnter={() => setOpenDropdown("categories")}
             onMouseLeave={() => setOpenDropdown(null)}
           >
@@ -158,7 +158,7 @@ const Navbar = ({ onSelectSubject }) => {
             <div
               className={`absolute right-0 top-full z-10 ${
                 openDropdown === "categories" ? "block" : "hidden"
-              } bg-[#650D1B] shadow-md text-white w-40 text-sm h-[20rem] overflow-auto rounded-md transition-all duration-300`}
+              } bg-[#003153] shadow-md text-white w-40 text-sm h-[20rem] overflow-auto rounded-md transition-all duration-300`}
             >
               <ul>
                 {subjects.map((subject) => (
@@ -170,7 +170,7 @@ const Navbar = ({ onSelectSubject }) => {
                         toCategory(id);
                         setOpenDropdown(null);
                       }} // optional: just to close dropdown
-                      className="w-full text-left rounded-md hover:bg-[#a35b64] hover:text-white p-2"
+                      className="w-full text-left rounded-md hover:bg-[#5a7385] hover:text-white p-2"
                     >
                       {subject}
                     </button>
@@ -201,19 +201,19 @@ const Navbar = ({ onSelectSubject }) => {
           />
         </div>
         <div
-          className={`sideBar absolute right-0 top-16 h-auto bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]
+          className={`sideBar absolute right-0 top-16 h-auto bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)]
           ${
             openSideBar === "sideBar" ? "block" : "hidden"
           } md:hidden z-50 rounded-2xl`}
         >
           <ul className="flex flex-col gap-5 border p-2 w-48 rounded-2xl text-lg">
-            <li className="cursor-pointer hover:bg-[#A35B64] px-3 py-2 rounded-md">
+            <li className="cursor-pointer hover:bg-[#5a7385] px-3 py-2 rounded-md">
               <Link to="/book_store/">Home</Link>
             </li>
-            <li className="cursor-pointer hover:bg-[#A35B64] px-3 py-2 rounded-md">
+            <li className="cursor-pointer hover:bg-[#5a7385] px-3 py-2 rounded-md">
               <Link to="/About">About Us</Link>
             </li>
-            <li className="cursor-pointer hover:bg-[#A35B64] px-3 py-2 rounded-md">
+            <li className="cursor-pointer hover:bg-[#5a7385] px-3 py-2 rounded-md">
               <Link to="/Contact">Contact Us</Link>
             </li>
             <li
@@ -232,7 +232,7 @@ const Navbar = ({ onSelectSubject }) => {
               <div
                 className={`absolute right-45 top-0 z-10 ${
                   openDropdown === "categories" ? "block" : "hidden"
-                } bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] shadow-md text-white w-38 text-sm h-[20rem] overflow-auto rounded-md transition-all duration-300`}
+                } bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] shadow-md text-white w-38 text-sm h-[20rem] overflow-auto rounded-md transition-all duration-300`}
               >
                 <ul>
                   {subjects.map((subject) => (
@@ -245,7 +245,7 @@ const Navbar = ({ onSelectSubject }) => {
                           setOpenDropdown(null);
                           setopenSideBar(null);
                         }} // optional: just to close dropdown
-                        className="w-full text-left rounded-md hover:bg-[#a35b64] hover:text-white p-2"
+                        className="w-full text-left rounded-md hover:bg-[#5a7385] hover:text-white p-2"
                       >
                         {subject}
                       </button>
@@ -270,7 +270,7 @@ const Navbar = ({ onSelectSubject }) => {
 
       {/*Login*/}      
       <div
-        className={`login absolute bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228] left-1/2 transform -translate-x-1/2 h-60 md:h-65 w-[80%] md:w-[40%] top-16 md:top-22 rounded-2xl shadow-2xl z-50 text-white ${
+        className={`login absolute bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] left-1/2 transform -translate-x-1/2 h-60 md:h-65 w-[80%] md:w-[40%] top-16 md:top-22 rounded-2xl shadow-2xl z-50 text-white ${
           viewLogin === true ? "block" : "hidden"
         }`}
       >
@@ -284,7 +284,7 @@ const Navbar = ({ onSelectSubject }) => {
           <div className="form py-2 px-2">
             <form className="flex flex-col gap-3" onSubmit={handleLogin}>
               <h1 className="text-center text-2xl">Login Now</h1>
-              <div className="username flex items-center gap-2 rounded-md  w-[100%] p-2 md:text-xl bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]">
+              <div className="username flex items-center gap-2 rounded-md  w-[100%] p-2 md:text-xl bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)]">
                 <label htmlFor="">Username:</label>
                 <input
                   type="text"
@@ -297,7 +297,7 @@ const Navbar = ({ onSelectSubject }) => {
                   id=""
                 />
               </div>
-              <div className="password flex items-center gap-2 rounded-md  w-[100%] p-2 md:text-xl bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]">
+              <div className="password flex items-center gap-2 rounded-md  w-[100%] p-2 md:text-xl bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)]">
                 <label htmlFor="">Password:</label>
                 <input
                   type="text"
@@ -313,7 +313,7 @@ const Navbar = ({ onSelectSubject }) => {
               <div className="submit flex">
                 <button
                   type="submit"
-                  className="rounded-md border px-4 py-2 mx-auto cursor-pointer hover:scale-105 duration-300 bg-gradient-to-tr from-[#650D1B] via-[#DE0D30] to-[#632228]"
+                  className="rounded-md border px-4 py-2 mx-auto cursor-pointer hover:scale-105 duration-300 bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)]"
                 >
                   Login
                 </button>
