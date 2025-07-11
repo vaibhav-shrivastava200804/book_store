@@ -1,8 +1,18 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import logo from "../../assets/books.svg"; // Update path as per your structure
-
+import { Link } from "react-router-dom";
 const Footer = () => {
+  const genres=[
+                "Fantasy",
+                "Science Fiction",
+                "Romance",
+                "Mystery",
+                "Biography",
+                "Self Help",
+                "History",
+                "Children",
+              ]
   return (
     <footer className="flex justify-center mt-2 bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)]">
       <div className="w-[86%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-between gap-14 text-white">
@@ -62,21 +72,14 @@ const Footer = () => {
               Explore Genres
             </h1>
             <ul className="flex flex-col gap-2">
-              {[
-                "Fantasy",
-                "Science Fiction",
-                "Romance",
-                "Mystery",
-                "Biography",
-                "Self Help",
-                "History",
-                "Children",
-              ].map((genre, idx) => (
+              {genres.map((genre, idx) => (
                 <li
                   key={idx}
                   className="font-semibold hover:text-[#ff0000] hover:scale-105 duration-300 cursor-pointer"
                 >
-                  {genre}
+                  <Link to={`/book_store/${genre.toLowerCase().replace(/ /g,"_")}`}>
+                    {genre}
+                  </Link>
                 </li>
               ))}
             </ul>

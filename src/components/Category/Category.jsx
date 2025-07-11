@@ -6,7 +6,7 @@ function Category() {
     const [books, setBooks] = useState([]);
     const [offset, setOffset] = useState(0);
     const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
     const limit = 20;
   useEffect(() => {
   async function fetchBooks() {

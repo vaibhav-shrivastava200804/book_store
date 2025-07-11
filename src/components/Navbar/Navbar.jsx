@@ -244,7 +244,7 @@ const Navbar = ({ onSelectSubject }) => {
                           toCategory(id);
                           setOpenDropdown(null);
                           setopenSideBar(null);
-                        }} // optional: just to close dropdown
+                        }} 
                         className="w-full text-left rounded-md hover:bg-[#5a7385] hover:text-white p-2"
                       >
                         {subject}
@@ -285,7 +285,7 @@ const Navbar = ({ onSelectSubject }) => {
             <form className="flex flex-col gap-3" onSubmit={handleLogin}>
               <h1 className="text-center text-2xl">Login Now</h1>
               <div className="username flex items-center gap-2 rounded-md  w-[100%] p-2 md:text-xl bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)]">
-                <label htmlFor="">Username:</label>
+                <label htmlFor="Username">Username:</label>
                 <input
                   type="text"
                   value={username}
@@ -294,11 +294,11 @@ const Navbar = ({ onSelectSubject }) => {
                   className="border rounded-md py-1 px-2 text-sm md:text-xl backdrop-blur bg-pink-300/20 w-[100%]"
                   placeholder="Enter username"
                   name=""
-                  id=""
+                  id="Username"
                 />
               </div>
               <div className="password flex items-center gap-2 rounded-md  w-[100%] p-2 md:text-xl bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)]">
-                <label htmlFor="">Password:</label>
+                <label htmlFor="Password">Password:</label>
                 <input
                   type="text"
                   value={password}
@@ -307,7 +307,7 @@ const Navbar = ({ onSelectSubject }) => {
                   className="border rounded-md py-1 px-2 text-sm md:text-xl backdrop-blur bg-pink-300/20 w-[100%]"
                   placeholder="Enter password"
                   name=""
-                  id=""
+                  id="Password"
                 />
               </div>
               <div className="submit flex">
