@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faC } from "@fortawesome/free-solid-svg-icons";
@@ -46,6 +46,18 @@ const Navbar = ({ onSelectSubject }) => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const loginRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (viewLogin && loginRef.current && !loginRef.current.contains(event.target)) {
+        setviewLogin(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [viewLogin]);
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("loggedIn");
@@ -73,7 +85,7 @@ const Navbar = ({ onSelectSubject }) => {
   };
 
   const toCategory = (categoryId) => {
-    navigate(`/book_store/${categoryId}`);
+    navigate(`/book_store/category/${categoryId}`);
   };
 
   const toggleSidebar = (name) => {
@@ -92,11 +104,13 @@ const Navbar = ({ onSelectSubject }) => {
     <div className="center p-1 sm:p-2 shadow-xl bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] relative">
       <div className="flex justify-between items-center text-white">
         {/* Logo */}
-        <img
-          src="https://www.svgrepo.com/show/263154/books-book.svg"
-          alt="logo"
-          className="w-10 h-14 hover:scale-110 duration-500 cursor-pointer"
-        />
+        <Link to="/book_store/">
+          <img
+            src="https://www.svgrepo.com/show/263154/books-book.svg"
+            alt="logo"
+            className="w-10 h-14 hover:scale-110 duration-500 cursor-pointer"
+          />
+        </Link>
 
         {/*desktop view*/}
         <ul className="items-center gap-4 relative z-50 hidden md:flex">
@@ -270,6 +284,7 @@ const Navbar = ({ onSelectSubject }) => {
 
       {/*Login*/}      
       <div
+      ref={loginRef}
         className={`login absolute bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] left-1/2 transform -translate-x-1/2 h-60 md:h-65 w-[80%] md:w-[40%] top-16 md:top-22 rounded-2xl shadow-2xl z-50 text-white ${
           viewLogin === true ? "block" : "hidden"
         }`}

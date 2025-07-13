@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const genres=[
                 "Fantasy",
-                "Science Fiction",
+                "Technology",
                 "Romance",
                 "Mystery",
                 "Biography",
@@ -13,6 +13,22 @@ const Footer = () => {
                 "History",
                 "Children",
               ]
+
+  const quickLinks=[
+    { id:1,name:"Home",link:"/book_store/"},
+    { id:2,name:"Best Sellers", link:"book_store/best_sellers"},
+    { id:3,name:"Contact Us", link:"/book_store/contact"},
+    { id:4,name:"About Us", link:"/book_store/about" }
+  ]
+
+  const additionalLinks = [
+    { id: 1, name: "E-books", link: "/book_store/e_books" },
+    { id: 2, name: "Author Highlights", link: "/book_store/author_highlights" },
+    { id: 3, name: "Reading Challenges", link: "/book_store/reading_challenges" },
+    { id: 4, name: "Gift Cards", link: "/book_store/gift_cards" },
+    { id: 5, name: "Help Center", link: "/book_store/help_center" },
+];
+
   return (
     <footer className="flex justify-center mt-2 bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)]">
       <div className="w-[86%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-between gap-14 text-white">
@@ -51,13 +67,13 @@ const Footer = () => {
           <div className="flex flex-col gap-5">
             <h1 className="text-2xl font-bold text-[#facc15]">Quick Links</h1>
             <ul className="flex flex-col gap-2">
-              {["Home", "Best Sellers", "Buy Now", "Contact Us"].map(
+              {quickLinks.map(
                 (link, idx) => (
                   <li
-                    key={idx}
+                    key={link.id}
                     className="font-semibold hover:text-[#ff0000] hover:scale-105 duration-300 cursor-pointer"
                   >
-                    {link}
+                    <Link to={`${link.link}`}>{link.name}</Link>
                   </li>
                 )
               )}
@@ -77,7 +93,7 @@ const Footer = () => {
                   key={idx}
                   className="font-semibold hover:text-[#ff0000] hover:scale-105 duration-300 cursor-pointer"
                 >
-                  <Link to={`/book_store/${genre.toLowerCase().replace(/ /g,"_")}`}>
+                  <Link to={`/book_store/category/${genre.toLowerCase().replace(/ /g,"_")}`}>
                     {genre}
                   </Link>
                 </li>
@@ -91,18 +107,12 @@ const Footer = () => {
           <div className="flex flex-col gap-5">
             <h1 className="text-2xl font-bold text-[#facc15]">Resources</h1>
             <ul className="flex flex-col gap-2">
-              {[
-                "E-books",
-                "Author Highlights",
-                "Reading Challenges",
-                "Gift Cards",
-                "Help Center",
-              ].map((item, idx) => (
+              {additionalLinks.map((item, idx) => (
                 <li
                   key={idx}
                   className="font-semibold cursor-pointer hover:text-[#ff0000] hover:scale-105 duration-300"
                 >
-                  {item}
+                  <Link to={`${item.link}`}>{item.name}</Link>
                 </li>
               ))}
             </ul>
