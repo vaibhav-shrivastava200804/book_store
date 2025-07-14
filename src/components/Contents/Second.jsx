@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 function Second() {
   const [books, setBooks] = useState([]);
       const limit = 8;
@@ -44,7 +45,7 @@ function Second() {
             </div>
           ))}
           <div className='flex rounded-lg items-center h-12 w-28 hover:bg-[#5a7385] hover:text-[white] group'>
-              <p className='flex items-center justify-center font-bold text-lg w-24 group-hover:scale-115 cursor-pointer mr-2 duration-300 text-white group-hover:text-[white]'>More <span className='group-hover:ml-2 duration-300'>&rarr;</span></p>
+              <Link to="/book_store/category/romance" className='flex items-center justify-center font-bold text-lg w-24 group-hover:scale-115 cursor-pointer mr-2 duration-300 text-white group-hover:text-[white]'>More <span className='group-hover:ml-2 duration-300'>&rarr;</span></Link>
               </div>
           </div>
       </div>
