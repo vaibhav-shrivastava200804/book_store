@@ -6,7 +6,7 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 const Menu = [
-  { id: 1, name: "Home", link: "/book_store/" },
+  { id: 1, name: "Home", link: "/" },
   { id: 2, name: "Login", link: "/Login/" },
 ];
 const subjects = [
@@ -85,7 +85,7 @@ const Navbar = ({ onSelectSubject }) => {
   };
 
   const toCategory = (categoryId) => {
-    navigate(`/book_store/category/${categoryId}`);
+    navigate(`/category/${categoryId}`);
   };
 
   const toggleSidebar = (name) => {
@@ -104,7 +104,7 @@ const Navbar = ({ onSelectSubject }) => {
     <div className="center p-1 sm:p-2 shadow-xl bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] relative">
       <div className="flex justify-between items-center text-white">
         {/* Logo */}
-        <Link to="/book_store/">
+        <Link to="/">
           <img
             src="https://www.svgrepo.com/show/263154/books-book.svg"
             alt="logo"
@@ -222,7 +222,7 @@ const Navbar = ({ onSelectSubject }) => {
         >
           <ul className="flex flex-col gap-5 border p-2 w-48 rounded-2xl text-lg">
             <li className="cursor-pointer hover:bg-[#5a7385] px-3 py-2 rounded-md">
-              <Link to="/book_store/">Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li className="cursor-pointer hover:bg-[#5a7385] px-3 py-2 rounded-md">
               <Link to="/About">About Us</Link>

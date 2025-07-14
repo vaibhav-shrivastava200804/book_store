@@ -29,15 +29,15 @@ const AppRoutes = () => {
       <Navbar />
       <ScrollToTop /> {/* This ensures scroll resets on every route change */}
       <Routes>
-        <Route path="/book_store/" element={<HomePage />} />
-        <Route path="book_store/category/:categoryId" element={<Category />} />
-        <Route path="book_store/about/" element={<About />} />
-        <Route path="book_store/contact" element={<Contact />} />
-        <Route path="book_store/e_books" element={<Ebooks />} />
-        <Route path="book_store/author_highlights" element={<AuthorHighlights />} />
-        <Route path="book_store/reading_challenges" element={<ReadingChallenges />} />
-        <Route path="book_store/gift_cards" element={<GiftCards />} />
-        <Route path="book_store/help_center" element={<HelpCenter />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/category/:categoryId" element={<Category />} />
+        <Route path="/about/" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/e_books" element={<Ebooks />} />
+        <Route path="/author_highlights" element={<AuthorHighlights />} />
+        <Route path="/reading_challenges" element={<ReadingChallenges />} />
+        <Route path="/gift_cards" element={<GiftCards />} />
+        <Route path="/help_center" element={<HelpCenter />} />
       </Routes>
       <Footer />
     </>

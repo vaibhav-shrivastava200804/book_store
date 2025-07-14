@@ -15,18 +15,18 @@ const Footer = () => {
               ]
 
   const quickLinks=[
-    { id:1,name:"Home",link:"/book_store/"},
+    { id:1,name:"Home",link:"/"},
     { id:2,name:"Best Sellers", link:"book_store/best_sellers"},
-    { id:3,name:"Contact Us", link:"/book_store/contact"},
-    { id:4,name:"About Us", link:"/book_store/about" }
+    { id:3,name:"Contact Us", link:"/contact"},
+    { id:4,name:"About Us", link:"/about" }
   ]
 
   const additionalLinks = [
-    { id: 1, name: "E-books", link: "/book_store/e_books" },
-    { id: 2, name: "Author Highlights", link: "/book_store/author_highlights" },
-    { id: 3, name: "Reading Challenges", link: "/book_store/reading_challenges" },
-    { id: 4, name: "Gift Cards", link: "/book_store/gift_cards" },
-    { id: 5, name: "Help Center", link: "/book_store/help_center" },
+    { id: 1, name: "E-books", link: "/e_books" },
+    { id: 2, name: "Author Highlights", link: "/author_highlights" },
+    { id: 3, name: "Reading Challenges", link: "/reading_challenges" },
+    { id: 4, name: "Gift Cards", link: "/gift_cards" },
+    { id: 5, name: "Help Center", link: "/help_center" },
 ];
 
   return (
@@ -93,7 +93,7 @@ const Footer = () => {
                   key={idx}
                   className="font-semibold hover:text-[#ff0000] hover:scale-105 duration-300 cursor-pointer"
                 >
-                  <Link to={`/book_store/category/${genre.toLowerCase().replace(/ /g,"_")}`}>
+                  <Link to={`/category/${genre.toLowerCase().replace(/ /g,"_")}`}>
                     {genre}
                   </Link>
                 </li>
