@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faC } from "@fortawesome/free-solid-svg-icons";
@@ -49,7 +49,11 @@ const Navbar = ({ onSelectSubject }) => {
   const loginRef = useRef(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (viewLogin && loginRef.current && !loginRef.current.contains(event.target)) {
+      if (
+        viewLogin &&
+        loginRef.current &&
+        !loginRef.current.contains(event.target)
+      ) {
         setviewLogin(false);
       }
     };
@@ -126,10 +130,16 @@ const Navbar = ({ onSelectSubject }) => {
                 <p>{isLoggedIn === true ? savedUser.username : "Login"}</p>
               </Link>
             </button>
-            {isLoggedIn&&
-            <button className="hover:bg-[#5a7385] px-1 cursor-pointer py-2 rounded-md" onClick={()=>{
-                handleLogout();
-              }}>LogOut</button>}
+            {isLoggedIn && (
+              <button
+                className="hover:bg-[#5a7385] px-1 cursor-pointer py-2 rounded-md"
+                onClick={() => {
+                  handleLogout();
+                }}
+              >
+                LogOut
+              </button>
+            )}
           </div>
 
           <li
@@ -142,20 +152,28 @@ const Navbar = ({ onSelectSubject }) => {
             </button>
 
             <div
-              className={`absolute left-0 top-full z-10 ${
-                openDropdown === "quick" ? "block" : "hidden"
-              } bg-[#003153] shadow-md w-[6rem] rounded-md transition-all duration-300`}
+              className={`absolute left-0 top-full z-10 bg-[#003153] shadow-md min-w-[6rem] rounded-md transition-all duration-300 origin-top transform ${
+                openDropdown === "quick"
+                  ? "scale-y-100 opacity-100"
+                  : "scale-y-0 opacity-0 pointer-events-none"
+              }`}
             >
-              <ul>
-                <li>
-                  <button className="w-full text-left rounded-md hover:bg-[#5a7385] hover:text-[white] p-2">
-                    Buy Now
-                  </button>
+              <ul className="flex flex-col gap-2">
+                <li className="">
+                  <Link
+                    to="/about"
+                    className="w-full text-left rounded-md hover:bg-[#5a7385] hover:text-white p-2 block"
+                  >
+                    About Us
+                  </Link>
                 </li>
-                <li>
-                  <button className="w-full text-left rounded-md hover:bg-[#5a7385] hover:text-white p-2">
+                <li className="">
+                  <Link
+                    to="/contact"
+                    className="w-full text-left rounded-md hover:bg-[#5a7385] hover:text-white p-2 block"
+                  >
                     Contact Us
-                  </button>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -258,7 +276,7 @@ const Navbar = ({ onSelectSubject }) => {
                           toCategory(id);
                           setOpenDropdown(null);
                           setopenSideBar(null);
-                        }} 
+                        }}
                         className="w-full text-left rounded-md hover:bg-[#5a7385] hover:text-white p-2"
                       >
                         {subject}
@@ -268,23 +286,25 @@ const Navbar = ({ onSelectSubject }) => {
                 </ul>
               </div>
             </li>
-            {isLoggedIn && 
-              <li className="cursor-pointer"
-              >
-                <button onClick={()=>{
-                setopenSideBar(null);
-                handleLogout();
-              }}>LogOut</button>
+            {isLoggedIn && (
+              <li className="cursor-pointer">
+                <button
+                  onClick={() => {
+                    setopenSideBar(null);
+                    handleLogout();
+                  }}
+                >
+                  LogOut
+                </button>
               </li>
-            }
+            )}
           </ul>
         </div>
       </div>
 
-
-      {/*Login*/}      
+      {/*Login*/}
       <div
-      ref={loginRef}
+        ref={loginRef}
         className={`login absolute bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] left-1/2 transform -translate-x-1/2 h-60 md:h-65 w-[80%] md:w-[40%] top-16 md:top-22 rounded-2xl shadow-2xl z-50 text-white ${
           viewLogin === true ? "block" : "hidden"
         }`}
