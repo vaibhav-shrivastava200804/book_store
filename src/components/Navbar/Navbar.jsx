@@ -145,7 +145,9 @@ const Navbar = ({ onSelectSubject }) => {
         <ul className="items-center gap-4 relative z-50 hidden md:flex">
           <form action="" className="flex items-center text-white" onSubmit={searchBooks}>
             <input type="text" name="" id="" placeholder="Search By Author, Title and more..." className="p-2 rounded-l-full border-l border-t border-b w-auto" value={searchItem} onChange={(e)=> setSearchItem(e.target.value)}/>
-            <FontAwesomeIcon icon={faSearch} className="p-2 py-3 rounded-r-full border-r border-t border-b"/>
+            <button type="submit" className="p-2 py-2 rounded-r-full border-r border-t border-b">
+              <FontAwesomeIcon icon={faSearch}/>
+            </button>
           </form>
           <div className="login hidden md:flex gap-2 items-center">
             <button
@@ -235,7 +237,9 @@ const Navbar = ({ onSelectSubject }) => {
         <div className="icon px-2 md:hidden flex gap-4 items-center">
           <form action="" className="items-center text-white hidden sm:inline-flex" onSubmit={searchBooks}>
             <input type="text" name="" id="searchBooks" placeholder="Search By Author, Title and more..." className="p-2 rounded-l-full border-l border-t border-b w-auto" value={searchItem} onChange={(e)=> setSearchItem(e.target.value)}/>
-            <FontAwesomeIcon icon={faSearch} className="p-2 py-3 rounded-r-full border-r border-t border-b"/>
+            <button type="submit" className="p-2 py-2 rounded-r-full border-r border-t border-b">
+              <FontAwesomeIcon icon={faSearch}/>
+            </button>
           </form>
           <div className="sm:hidden">
             <FontAwesomeIcon icon={faSearch} className="p-2 text-xl rounded-full border cursor-pointer" onClick={()=>toggleSearch()}/>
@@ -388,7 +392,9 @@ const Navbar = ({ onSelectSubject }) => {
         viewSearch===true && (
           <form action="" className="absolute bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] left-1/2 transform -translate-x-1/2 md:w-[40%] top-16 md:top-22 rounded-2xl shadow-2xl z-50 text-white sm:hidden flex p-2" onSubmit={searchBooks}>
             <input type="text" name="" id="searchBooks" placeholder="Search By Author, Title and more..." className="p-2 rounded-l-full border-l border-t border-b w-auto" onChange={(e)=> setSearchItem(e.target.value)}/>
-            <FontAwesomeIcon icon={faSearch} className="p-2 py-3 rounded-r-full border-r border-t border-b"/>
+            <button type="submit" className="p-2 py-3 flex rounded-r-full border-r border-t border-b">
+              <FontAwesomeIcon icon={faSearch} />
+            </button>  
           </form>
         )
       }
