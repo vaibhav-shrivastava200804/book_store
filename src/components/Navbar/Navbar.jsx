@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faC } from "@fortawesome/free-solid-svg-icons";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faC, faU } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { setTitle } from "../../features/searchBooks/searchSlice";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 const Menu = [
   { id: 1, name: "Home", link: "/" },
   { id: 2, name: "Login", link: "/Login/" },
@@ -46,7 +49,10 @@ const Navbar = ({ onSelectSubject }) => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [viewSearch, setviewSearch] = useState(false);
+  const [searchItem, setSearchItem] = useState("")
   const loginRef = useRef(null);
+  const dispatch=useDispatch();
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -91,6 +97,8 @@ const Navbar = ({ onSelectSubject }) => {
   const toCategory = (categoryId) => {
     navigate(`/category/${categoryId}`);
   };
+  
+  
 
   const toggleSidebar = (name) => {
     setopenSideBar(openSideBar === name ? null : name);
@@ -103,6 +111,23 @@ const Navbar = ({ onSelectSubject }) => {
       setviewLogin(true);
     }
   };
+
+  const toggleSearch =()=>{
+    if (viewSearch === true) {
+      setviewSearch(false)
+    } else {
+      setviewSearch(true)
+    }
+  };
+  
+  const searchBooks=async(e)=>{
+    e.preventDefault();
+    setviewSearch(false);
+    console.log(searchItem);
+    dispatch(setTitle(searchItem))
+    navigate(`/search/${searchItem}`);
+  }
+  
   const savedUser = JSON.parse(localStorage.getItem("user")) || {};
   return (
     <div className="center p-1 sm:p-2 shadow-xl bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] relative">
@@ -112,34 +137,27 @@ const Navbar = ({ onSelectSubject }) => {
           <img
             src="https://www.svgrepo.com/show/263154/books-book.svg"
             alt="logo"
-            className="w-10 h-14 hover:scale-110 duration-500 cursor-pointer"
+            className="w-10 h-14 hover:scale-110 duration-500 cursor-pointer min-w-[40px] min-h-[55px]"
           />
         </Link>
 
         {/*desktop view*/}
         <ul className="items-center gap-4 relative z-50 hidden md:flex">
+          <form action="" className="flex items-center text-white" onSubmit={searchBooks}>
+            <input type="text" name="" id="" placeholder="Search By Author, Title and more..." className="p-2 rounded-l-full border-l border-t border-b w-auto" value={searchItem} onChange={(e)=> setSearchItem(e.target.value)}/>
+            <FontAwesomeIcon icon={faSearch} className="p-2 py-3 rounded-r-full border-r border-t border-b"/>
+          </form>
           <div className="login hidden md:flex gap-2 items-center">
             <button
-              className="hover:scale-105 hover:bg-[#5a7385] duration-300 rounded-md px-1 py-2 cursor-pointer"
+              className="hover:scale-105 bg-[#022136] hover:bg-[#5a7385] duration-300 rounded-full px-4 p-2 cursor-pointer"
               onClick={() => {
                 if (!isLoggedIn) toggleLogin();
+                if (isLoggedIn) handleLogout();
               }}
             >
-              <Link className="flex gap-3 items-center">
-                <FontAwesomeIcon icon={faUser} />
-                <p>{isLoggedIn === true ? savedUser.username : "Login"}</p>
-              </Link>
+                <p>{isLoggedIn === true ? savedUser.username[0] : "Login"}</p>
             </button>
-            {isLoggedIn && (
-              <button
-                className="hover:bg-[#5a7385] px-1 cursor-pointer py-2 rounded-md"
-                onClick={() => {
-                  handleLogout();
-                }}
-              >
-                LogOut
-              </button>
-            )}
+            
           </div>
 
           <li
@@ -190,7 +208,7 @@ const Navbar = ({ onSelectSubject }) => {
             <div
               className={`absolute right-0 top-full z-10 ${
                 openDropdown === "categories" ? "block" : "hidden"
-              } bg-[#003153] shadow-md text-white w-40 text-sm h-[20rem] overflow-auto rounded-md transition-all duration-300`}
+              } bg-[#003153] shadow-md text-white w-40 text-sm h-[20rem] overflow-auto rounded-md transition-all duration-300 custom-scroll`}
             >
               <ul>
                 {subjects.map((subject) => (
@@ -214,23 +232,33 @@ const Navbar = ({ onSelectSubject }) => {
         </ul>
 
         {/* Mobile View */}
-        <div className="icon px-2 md:hidden flex gap-6 items-center">
+        <div className="icon px-2 md:hidden flex gap-4 items-center">
+          <form action="" className="items-center text-white hidden sm:inline-flex" onSubmit={searchBooks}>
+            <input type="text" name="" id="searchBooks" placeholder="Search By Author, Title and more..." className="p-2 rounded-l-full border-l border-t border-b w-auto" value={searchItem} onChange={(e)=> setSearchItem(e.target.value)}/>
+            <FontAwesomeIcon icon={faSearch} className="p-2 py-3 rounded-r-full border-r border-t border-b"/>
+          </form>
+          <div className="sm:hidden">
+            <FontAwesomeIcon icon={faSearch} className="p-2 text-xl rounded-full border cursor-pointer" onClick={()=>toggleSearch()}/>
+          </div>
           <div className="login cursor-pointer">
             <button
               onClick={() => {
-                if (!isLoggedIn) toggleLogin();
+                if (!isLoggedIn) {
+                  toggleLogin();
+                } else {
+                  toggleSidebar("sideBar");
+                }
               }}
-              className="flex gap-2 items-center"
+              className="flex gap-2 items-center bg-[#022136] p-2 rounded-full px-3 border border-white cursor-pointer"
             >
-              <FontAwesomeIcon icon={faUser} />
-              <p>{isLoggedIn === true ? savedUser.username : "Login"}</p>
+              <p className="text-sm sm:text-md">{isLoggedIn === true ? savedUser.username[0] : <FontAwesomeIcon icon={faUser}/>}</p>
             </button>
           </div>
-          <FontAwesomeIcon
-            icon={faBars}
-            className="text-4xl cursor-pointer"
-            onClick={() => toggleSidebar("sideBar")}
-          />
+            {
+              !isLoggedIn && (
+                <FontAwesomeIcon icon={faBars} className="text-3xl sm:text-4xl cursor-pointer" onClick={() => toggleSidebar("sideBar")}/>
+              )
+            }
         </div>
         <div
           className={`sideBar absolute right-0 top-16 h-auto bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)]
@@ -287,15 +315,12 @@ const Navbar = ({ onSelectSubject }) => {
               </div>
             </li>
             {isLoggedIn && (
-              <li className="cursor-pointer">
-                <button
-                  onClick={() => {
+              <li className="cursor-pointer w-full text-left rounded-md hover:bg-[#5a7385] hover:text-white p-2"
+              onClick={() => {
                     setopenSideBar(null);
                     handleLogout();
-                  }}
-                >
+                  }}>
                   LogOut
-                </button>
               </li>
             )}
           </ul>
@@ -357,6 +382,16 @@ const Navbar = ({ onSelectSubject }) => {
           </div>
         </div>
       </div>
+
+      {/*Search Icon*/}
+      {
+        viewSearch===true && (
+          <form action="" className="absolute bg-[#003153] bg-[linear-gradient(315deg,_#003153_0%,_#1B1B1B_74%)] left-1/2 transform -translate-x-1/2 md:w-[40%] top-16 md:top-22 rounded-2xl shadow-2xl z-50 text-white sm:hidden flex p-2" onSubmit={searchBooks}>
+            <input type="text" name="" id="searchBooks" placeholder="Search By Author, Title and more..." className="p-2 rounded-l-full border-l border-t border-b w-auto" onChange={(e)=> setSearchItem(e.target.value)}/>
+            <FontAwesomeIcon icon={faSearch} className="p-2 py-3 rounded-r-full border-r border-t border-b"/>
+          </form>
+        )
+      }
     </div>
   );
 };
