@@ -126,6 +126,7 @@ const Navbar = ({ onSelectSubject }) => {
     console.log(searchItem);
     dispatch(setTitle(searchItem))
     navigate(`/search/${searchItem}`);
+    setSearchItem("")
   }
   
   const savedUser = JSON.parse(localStorage.getItem("user")) || {};

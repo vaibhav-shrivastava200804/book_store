@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 function Category() {
     const {categoryId} = useParams();
@@ -45,8 +46,8 @@ function Category() {
               <div className="text-red-400 text-xl">{error}</div>
             ) : (
               books.map((book) => (
-          <div key={book.key} className="flex flex-col gap-1 border-[white] justify-between border-[1px] rounded-md w-[300px] sm:w-[320px] p-1 flex-shrink-0 h-[580px] sm:h-[500px] overflow-clip hover:overflow-auto custom-scroll">
-            <div className="w-[280px] h-[420px] sm:w-[300px] sm:h-auto flex items-center justify-center bg-white rounded-md overflow-hidden border-[#facc15] border mx-auto hover:scale-105 duration-300 cursor-pointer">
+          <div key={book.key} className="flex flex-col gap-1 border-[white] justify-between border-[1px] rounded-md w-[300px] p-1 flex-shrink-0 h-[580px] sm:h-[500px] overflow-clip hover:overflow-auto custom-scroll">
+            <div className="w-[280px] h-[420px] sm:h-auto flex items-center justify-center bg-white rounded-md overflow-hidden border-[#facc15] border mx-auto hover:scale-105 duration-300 cursor-pointer">
                 <img
                   src={
                     book.cover_id
@@ -63,6 +64,14 @@ function Category() {
               <p className="text-white ml-1">
                 <b className='text-md font-extrabold uppercase text-[white]'>By: </b> <span className='font-medium'>{book.authors?.map((a) => a.name).join(", ") || "Unknown Author"}</span>
               </p>
+            </div>
+            <div className="buttons flex justify-around">
+              <Link className="shadow-2xl duration-300 rounded-md hover:scale-105 p-1 border bg-amber-300 hover:bg-amber-400 hover:text-gray-700 text-gray-600" to={`https://en.wikipedia.org/wiki/${book.authors?.map((a) => a.name).join(", ")}`} target="_blank">
+                About Author
+              </Link>
+              <Link className="shadow-2xl duration-300 rounded-md hover:scale-105 p-1 border bg-amber-300 hover:bg-amber-400 hover:text-gray-700 text-gray-600" to={`https://en.wikipedia.org/wiki/${book.title}`} target="_blank">
+                About Book
+              </Link>
             </div>
           </div>
         ))  
